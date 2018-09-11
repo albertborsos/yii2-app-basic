@@ -7,3 +7,18 @@ services:
       - ./:/app:delegated
     ports:
       - '8000:80'
+    links:
+        - db
+  db:
+    image: mariadb:latest
+    ports:
+        - 3306
+    environment:
+        MYSQL_DATABASE: database
+        MYSQL_USER: user
+        MYSQL_PASSWORD: pass
+        MYSQL_ROOT_PASSWORD: password
+    volumes:
+        - db_data:/var/lib/mysql
+volumes:
+  db_data:
